@@ -3,4 +3,4 @@ project(NinaEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(NinaEngine main.cpp)
+add_library(NinaEngine SHARED library.cpp)
