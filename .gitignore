@@ -14,3 +14,6 @@ Intermediates/
 **.vcxproj.user
 **.csproj
 
+## Rider
+.idea
+
