@@ -1,7 +1,9 @@
 # Binaries
 **/bin/
-bin-int/
+bin-intermediate/
 Intermediates/
+**/x64
+**/Win32
 
 # log files
 *.log
