@@ -1,6 +1,0 @@
-#ifndef NINAENGINE_LIBRARY_H
-#define NINAENGINE_LIBRARY_H
-
-void hello();
-
-#endif //NINAENGINE_LIBRARY_H

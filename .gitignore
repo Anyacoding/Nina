@@ -1,2 +1,16 @@
-/cmake-build-debug/
-.idea
+# Binaries
+**/bin/
+bin-int/
+Intermediates/
+
+# log files
+*.log
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
+
