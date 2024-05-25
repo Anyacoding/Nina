@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#include <Nina.h>
+#include <iostream>
 
 #ifdef NINA_PLATFORM_WINDOWS
     #ifdef NINA_BUILD_DLL
@@ -7,7 +8,7 @@
         #define NINA_API __declspec(dllimport)
     #endif
 #else
-// #error Nina only support Windows！
+    #error Nina only support Windows！
 #endif
 
 namespace Nina {
@@ -16,10 +17,21 @@ namespace Nina {
     
 }
 
-
-int main()
+class SandBox: public Nina::Application
 {
-    Nina::Print();
+public:
+    void Run() override
+    {
+        while (true)
+        {
+            std::cout << "hello Anya!" << "\n";
+        }
+    }
+};
+
+Nina::Application* Nina::CreateApplication()
+{
+    return new SandBox();
 }
 
 

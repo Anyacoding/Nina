@@ -4,15 +4,16 @@
 
 namespace Nina {
     
-
     class NINA_API Application {
     public:
         Application();
         virtual ~Application();
         
     public:
-        void Run();
+        virtual void Run();
     };
+
+    extern Application* CreateApplication();
     
 }
 
