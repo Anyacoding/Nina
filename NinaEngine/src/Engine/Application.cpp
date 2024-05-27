@@ -2,19 +2,8 @@
 #include <iostream>
 
 namespace Nina {
-    
-    Application::Application()
-    {   
 
-    }
-
-
-    Application::~Application()
-    {
-
-    }
-
-    void Nina::Application::Run()
+    void Application::Run()
     {
         while (true)
         {

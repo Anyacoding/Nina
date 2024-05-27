@@ -6,8 +6,8 @@ namespace Nina {
     
     class NINA_API Application {
     public:
-        Application();
-        virtual ~Application();
+        Application() = default;
+        virtual ~Application() = default;
         
     public:
         virtual void Run();

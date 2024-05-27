@@ -24,7 +24,7 @@ public:
     {
         while (true)
         {
-            std::cout << "hello Anya!" << "\n";
+            // std::cout << "hello Anya!" << "\n";
         }
     }
 };
@@ -33,5 +33,7 @@ Nina::Application* Nina::CreateApplication()
 {
     return new SandBox();
 }
+
+
 
 

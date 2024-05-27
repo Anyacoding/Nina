@@ -1,0 +1,3 @@
+[submodule "NinaEngine/dependence/spdlog"]
+	path = NinaEngine/dependence/spdlog
+	url = https://github.com/gabime/spdlog
