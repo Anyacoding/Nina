@@ -1,6 +1,7 @@
 workspace "Nina" 
     architecture "x64"
     configurations { "Debug", "Release", "Dist" } 
+    startproject "Sandbox"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -66,7 +67,7 @@ project "Sandbox"
     
     includedirs
     {
-        "%{prj.name}/dependence/spdlog/include",
+        "NinaEngine/dependence/spdlog/include",
         "NinaEngine/src",
     }
 

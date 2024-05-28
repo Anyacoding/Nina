@@ -4,7 +4,7 @@
 
 #ifdef NINA_PLATFORM_WINDOWS
 
-inline int main(int __argc, char** __argv)
+int main(int __argc, char** __argv)
 {
     Nina::Log::Init();
     NINA_CORE_ERROR("Init Engine!");
