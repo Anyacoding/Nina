@@ -1,5 +1,5 @@
 workspace "Nina" 
-    architecture “x64”
+    architecture "x64"
     configurations { "Debug", "Release", "Dist" } 
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -8,8 +8,8 @@ project "NinaEngine"
     location "NinaEngine"
     kind "SharedLib"  
     language "C++"   
-    targetdir "bin/" .. outputdir .. "/%{prj.name}"
-    objdir "bin-int/" .. outputdir .. "/%{prj.name}"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
     
     files 
     {
@@ -25,7 +25,7 @@ project "NinaEngine"
     filter { "system:windows" } 
         cppdialect "C++20"
         staticruntime "On"
-        systemversion "Latest"
+        systemversion "10.0.19041.0"
 
         defines 
         {
@@ -55,8 +55,8 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"  
     language "C++"   
-    targetdir "bin/" .. outputdir .. "/%{prj.name}"
-    objdir "bin-int/" .. outputdir .. "/%{prj.name}"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
     files 
     {
@@ -78,7 +78,7 @@ project "Sandbox"
     filter { "system:windows" } 
         cppdialect "C++20"
         staticruntime "On"
-        systemversion "Latest"
+        systemversion "10.0.19041.0"
 
         defines 
         {
