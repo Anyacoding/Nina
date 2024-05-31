@@ -1,7 +1,5 @@
 #include "Application.h"
 #include "Engine/Events/ApplicationEvent.h"
-#include <iostream>
-
 #include "Log.h"
 
 namespace Nina {
@@ -12,12 +10,12 @@ namespace Nina {
 
         if (Event.IsInCategory(EventCategoryApplication))
         {
-            NINA_CORE_TRACE(Event.ToString());
+            NINA_CORE_LOG(critical, Event.ToString());
         }
 
         if (Event.IsInCategory(EventCategoryInput))
         {
-            NINA_CORE_TRACE(Event.ToString());
+            NINA_CORE_LOG(trace, Event.ToString());
         }
         
         while (true);

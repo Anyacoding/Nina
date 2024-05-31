@@ -8,8 +8,8 @@
 int main(int __argc, char** __argv)
 {
     Nina::Log::Init();
-    NINA_CORE_ERROR("Init Engine!");
-    NINA_CLIENT_INFO("Hello Anya!");
+    NINA_CORE_LOG(err, "Init Engine!");
+    NINA_CLIENT_LOG(info, "Hello Anya!");
     
     auto app = Nina::CreateApplication();
     app->Run();
