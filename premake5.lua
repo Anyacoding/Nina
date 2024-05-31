@@ -20,13 +20,14 @@ project "NinaEngine"
 
     includedirs
     {
+        "%{prj.name}/src",
         "%{prj.name}/dependence/spdlog/include",
     }
 
     filter { "system:windows" } 
         cppdialect "C++20"
         staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines 
         {
@@ -36,6 +37,7 @@ project "NinaEngine"
 
         postbuildcommands
         {
+            "{MKDIR} ../bin/" .. outputdir .. "/Sandbox",
             "{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox",
         }
 
@@ -67,6 +69,7 @@ project "Sandbox"
     
     includedirs
     {
+        "%{prj.name}/src",
         "NinaEngine/dependence/spdlog/include",
         "NinaEngine/src",
     }
@@ -79,7 +82,7 @@ project "Sandbox"
     filter { "system:windows" } 
         cppdialect "C++20"
         staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines 
         {

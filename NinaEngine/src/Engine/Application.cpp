@@ -1,19 +1,26 @@
 #include "Application.h"
+#include "Engine/Events/ApplicationEvent.h"
 #include <iostream>
 
-namespace Nina {
+#include "Log.h"
 
+namespace Nina {
+    
     void Application::Run()
     {
-        while (true)
-        {
-            std::cout << "hello NinaEngine!" << "\n";
-        }
-    }
+        WindowResizeEvent Event(1280, 720);
 
-    void NINA_API Print()
-    {
-        std::cout << "hello NinaEngine!" << "\n";
+        if (Event.IsInCategory(EventCategoryApplication))
+        {
+            NINA_CORE_TRACE(Event.ToString());
+        }
+
+        if (Event.IsInCategory(EventCategoryInput))
+        {
+            NINA_CORE_TRACE(Event.ToString());
+        }
+        
+        while (true);
     }
     
 }

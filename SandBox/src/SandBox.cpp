@@ -20,13 +20,7 @@ namespace Nina {
 class SandBox: public Nina::Application
 {
 public:
-    void Run() override
-    {
-        while (true)
-        {
-            // std::cout << "hello Anya!" << "\n";
-        }
-    }
+
 };
 
 Nina::Application* Nina::CreateApplication()
