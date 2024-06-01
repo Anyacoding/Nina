@@ -2,10 +2,6 @@
 
 #include "Event.h"
 #include "Engine/Core.h"
-#include "spdlog/spdlog.h"
-
-#include <sstream>
-
 
 namespace Nina
 {
@@ -62,19 +58,4 @@ namespace Nina
 }
 
 
-// namespace fmt {
-//     template <>
-//     struct formatter<Nina::WindowResizeEvent> {
-//         // Parse format specifications if needed (here we ignore them)
-//         // constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
-//         //     return ctx.end();
-//         // }
-//
-//         // Format the WindowResizeEvent
-//         template <typename FormatContext>
-//         auto format(const Nina::WindowResizeEvent& event, FormatContext& ctx) -> decltype(ctx.out()) {
-//             return fmt::format_to(ctx.out(), "WindowResizeEvent(width={}, height={})", event.GetWidth(), event.GetHeight());
-//         }
-//     };
-// }
 

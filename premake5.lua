@@ -11,6 +11,9 @@ project "NinaEngine"
     language "C++"   
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "ninapch.h"
+    pchsource "NinaEngine/src/ninapch.cpp"
     
     files 
     {

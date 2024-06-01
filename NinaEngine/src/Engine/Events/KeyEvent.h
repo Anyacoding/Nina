@@ -2,7 +2,6 @@
 
 #include "Engine/Core.h"
 #include "Event.h"
-#include <sstream>
 
 namespace Nina
 {

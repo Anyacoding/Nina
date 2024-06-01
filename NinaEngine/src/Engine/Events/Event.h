@@ -1,8 +1,8 @@
 #pragma once
+
 #include "Engine/Core.h"
-#include <string>
-#include <functional>
-#include <concepts>
+#include "spdlog/spdlog.h"
+
 
 namespace Nina
 {
@@ -39,7 +39,7 @@ namespace Nina
         virtual int GetCategoryFlags() const = 0;
         virtual std::string ToString() const { return GetName(); }
         
-        bool IsInCategory(EventCategory category)
+        bool IsInCategory(EventCategory category) const
         {
             return GetCategoryFlags() & category;
         }
@@ -81,9 +81,6 @@ namespace Nina
         Event& Event;
     };
 
-    
-
-
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
 virtual EventType GetEvenType() const override { return GetStaticType(); } \
 virtual const std::string GetName() const override { return #type; }
@@ -91,3 +88,20 @@ virtual const std::string GetName() const override { return #type; }
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
     
 }
+
+// namespace fmt {
+//     template <>
+//     struct formatter<Nina::Event> {
+//         // Parse format specifications if needed (here we ignore them)
+//         constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
+//             return ctx.end();
+//         }
+//
+//         // Format the WindowResizeEvent
+//         template <typename FormatContext>
+//         auto format(const Nina::Event& event, FormatContext& ctx) -> decltype(ctx.out()) {
+//             return fmt::format_to(ctx.out(), "WindowResizeEvent(width={}, height={})", event.GetWidth(), event.GetHeight());
+//         }
+//     };
+// }
+
