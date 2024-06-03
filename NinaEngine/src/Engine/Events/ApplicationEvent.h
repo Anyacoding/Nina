@@ -5,7 +5,7 @@
 
 namespace Nina
 {
-    class WindowResizeEvent: public Event
+    class NINA_API WindowResizeEvent: public Event
     {
     public:
         WindowResizeEvent(size_t Width, size_t Height): Width(Width), Height(Height)

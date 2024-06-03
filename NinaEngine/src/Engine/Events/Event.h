@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Engine/Core.h"
-#include "spdlog/spdlog.h"
-
+#include <string>
+#include <functional>
 
 namespace Nina
 {
@@ -56,7 +56,7 @@ namespace Nina
     template<class T>
     concept DerivedFromEvent = std::is_base_of_v<Event, T>;
     
-    class EventDispatcher
+    class NINA_API EventDispatcher
     {
     private:
         template<class T>

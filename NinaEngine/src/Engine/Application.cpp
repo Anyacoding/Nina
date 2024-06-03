@@ -1,25 +1,21 @@
 #include "ninapch.h"
 #include "Application.h"
-#include "Engine/Events/ApplicationEvent.h"
-#include "Log.h"
+#include <GLFW/glfw3.h>
+
 
 namespace Nina {
     
+    Application::Application()
+    {
+        Window = std::unique_ptr<class Window>(Window::Create());
+    }
+
     void Application::Run()
     {
-        WindowResizeEvent Event(1280, 720);
-
-        if (Event.IsInCategory(EventCategoryApplication))
+        while (Window->bIsRunning)
         {
-            NINA_CORE_LOG(warn, Event.ToString());  
+            Window->OnUpdate();
         }
-
-        if (Event.IsInCategory(EventCategoryInput))
-        {
-            NINA_CORE_LOG(err, Event.ToString());
-        }
-        
-        while (true);
     }
     
 }

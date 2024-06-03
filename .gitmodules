@@ -1,3 +1,6 @@
 [submodule "NinaEngine/dependence/spdlog"]
 	path = NinaEngine/dependence/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "NinaEngine/dependence/GLFW"]
+	path = NinaEngine/dependence/GLFW
+	url = https://github.com/TheCherno/glfw

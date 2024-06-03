@@ -5,6 +5,13 @@ workspace "Nina"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- use lua table to add the include dirs
+IncludeDir = {}
+IncludeDir["GLFW"] = "NinaEngine/dependence/GLFW/include"
+
+-- include the sub premake5.lua
+include "NinaEngine/dependence/GLFW"
+
 project "NinaEngine"  
     location "NinaEngine"
     kind "SharedLib"  
@@ -25,6 +32,13 @@ project "NinaEngine"
     {
         "%{prj.name}/src",
         "%{prj.name}/dependence/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter { "system:windows" } 
