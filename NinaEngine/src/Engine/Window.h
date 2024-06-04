@@ -37,9 +37,6 @@ namespace Nina
         virtual bool IsVSync() const = 0;
 
         static Window* Create(const WindowProps& Props = WindowProps());
-
-    public:
-        bool bIsRunning = true;
     };
 
 }

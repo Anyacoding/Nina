@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "Events/ApplicationEvent.h"
 #include <memory>
 
 namespace Nina {
@@ -11,11 +12,15 @@ namespace Nina {
         Application();
         virtual ~Application() = default;
         
-    public:
         virtual void Run();
+        void OnEvent(Event& Event);
+
+    private:
+        bool OnWindowClose(WindowCloseEvent& Event);
 
     private:
         std::unique_ptr<Window> Window;
+        bool bIsRunning = true;
     };
 
     extern Application* CreateApplication();

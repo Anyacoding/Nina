@@ -41,7 +41,7 @@ namespace Nina
         std::string ToString() const override
         {
             std::stringstream ss;
-            ss << "MouseScrolledEven: " << OffsetX << ", " << OffsetY;
+            ss << "MouseScrolledEvent: " << OffsetX << ", " << OffsetY;
             return ss.str();
         }
 

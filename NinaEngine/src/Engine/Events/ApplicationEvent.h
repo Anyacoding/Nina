@@ -2,6 +2,7 @@
 
 #include "Event.h"
 #include "Engine/Core.h"
+#include <sstream>
 
 namespace Nina
 {
@@ -28,7 +29,7 @@ namespace Nina
         size_t Width, Height;
     };
 
-    class NINA_API WindowCloseEvent: Event
+    class NINA_API WindowCloseEvent: public Event
     {
     public:
         EVENT_CLASS_TYPE(WindowClose)
