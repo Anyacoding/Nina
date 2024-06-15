@@ -60,14 +60,17 @@ project "NinaEngine"
 
     filter { "configurations:Debug" }
         defines { "NINA_DEBUG" }
+        buildoptions "/MDd"
         symbols "On"
 
     filter { "configurations:Release" }
         defines { "NINA_RELEASE" }
+        buildoptions "/MD"
         optimize "On"
 
     filter { "configurations:Dist" }
         defines { "NINA_DIST" }
+        buildoptions "/MD"
         optimize "On"
 
 
@@ -108,12 +111,15 @@ project "Sandbox"
 
     filter { "configurations:Debug" }
         defines { "NINA_DEBUG" }
+        buildoptions "/MDd"
         symbols "On"
 
     filter { "configurations:Release" }
         defines { "NINA_RELEASE" }
+        buildoptions "/MD"
         optimize "On"
 
     filter { "configurations:Dist" }
         defines { "NINA_DIST" }
+        buildoptions "/MD"
         optimize "On"

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Engine/Core.h"
-#include "Engine/Application.h"
-#include "Engine/Log.h"
+#include "Engine/Core/Core.h"
+#include "Engine/Core/Application.h"
+#include "Engine/Core/Log.h"
 
 //-------------EntryPoint-----------------//
-#include "Engine/EntryPoint.h"
+#include "Engine/Core/EntryPoint.h"
 //-------------EntryPoint-----------------//

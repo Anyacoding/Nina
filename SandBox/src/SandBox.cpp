@@ -11,15 +11,31 @@
     #error Nina only support Windows！
 #endif
 
-namespace Nina {
+class ExampleLayer: public Nina::Layer
+{
+public:
+    ExampleLayer(): Layer("Example")
+    {}
 
-    void NINA_API Print();
-    
-}
+    void OnUpdate() override
+    {
+        NINA_LOG(info, "ExampleLayer::Update");
+    }
+
+    void OnEvent(Nina::Event& Event) override
+    {
+        NINA_LOG(trace, Event.ToString());
+    }
+
+};
 
 class SandBox: public Nina::Application
 {
 public:
+    SandBox()
+    {
+        PushLayer(new ExampleLayer());
+    }
 
 };
 

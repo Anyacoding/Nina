@@ -2,7 +2,9 @@
 
 #include "Core.h"
 #include "Window.h"
-#include "Events/ApplicationEvent.h"
+#include "Engine/Events/ApplicationEvent.h"
+#include "Engine/Core/Layer.h"
+#include "Engine/Core/LayerStack.h"
 #include <memory>
 
 namespace Nina {
@@ -13,7 +15,10 @@ namespace Nina {
         virtual ~Application() = default;
         
         virtual void Run();
-        void OnEvent(Event& Event);
+        virtual void OnEvent(Event& Event);
+
+        void PushLayer(Layer* Layer);
+        void PushOverlay(Layer* Overlay);
 
     private:
         bool OnWindowClose(WindowCloseEvent& Event);
@@ -21,6 +26,7 @@ namespace Nina {
     private:
         std::unique_ptr<Window> Window;
         bool bIsRunning = true;
+        LayerStack LayerStack;
     };
 
     extern Application* CreateApplication();

@@ -26,6 +26,10 @@ namespace Nina {
         
         while (bIsRunning)
         {
+            for (Layer* Layer : LayerStack)
+            {
+                Layer->OnUpdate();
+            }
             Window->OnUpdate();
         }
     }
@@ -37,13 +41,31 @@ namespace Nina {
         {
             return this->OnWindowClose(Event);
         });
-        
-        NINA_CORE_LOG(trace, Event.ToString());
+
+        for (auto It = LayerStack.rbegin(); It != LayerStack.rend(); ++It)
+        {
+            if (Event.bHandled)
+            {
+                break;
+            }
+            (*It)->OnEvent(Event);
+        }
     }
 
+    
     bool Application::OnWindowClose(WindowCloseEvent& Event)
     {
         bIsRunning = false;
         return true;
+    }
+
+    void Application::PushLayer(Layer* Layer)
+    {
+        LayerStack.PushLayer(Layer);
+    }
+    
+    void Application::PushOverlay(Layer* Overlay)
+    {
+        LayerStack.PushOverlay(Overlay);
     }
 }

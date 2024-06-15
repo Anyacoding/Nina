@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Core.h"
+#include "Engine/Core/Core.h"
 #include <string>
 #include <functional>
 
@@ -49,7 +49,7 @@ namespace Nina
             return os << e.ToString();
         }
 
-    protected:
+    public:
         bool bHandled = false;
     };
 
