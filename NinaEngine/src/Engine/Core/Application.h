@@ -6,6 +6,7 @@
 #include "Engine/Core/Layer.h"
 #include "Engine/Core/LayerStack.h"
 #include <memory>
+#include <iostream>
 
 namespace Nina {
     

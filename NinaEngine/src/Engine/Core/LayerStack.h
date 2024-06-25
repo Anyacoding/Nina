@@ -5,7 +5,7 @@
 
 namespace Nina
 {
-    class LayerStack
+    class NINA_API LayerStack
     {
     public:
         LayerStack();

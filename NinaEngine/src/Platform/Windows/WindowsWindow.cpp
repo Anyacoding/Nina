@@ -4,6 +4,8 @@
 #include "Engine/Events/KeyEvent.h"
 #include "Engine/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Nina
 {
@@ -45,6 +47,8 @@ namespace Nina
 
         GLwindow = glfwCreateWindow(Data.Width, Data.Height, Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(GLwindow);
+        int Status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        NINA_CORE_ASSERT(Status, "Failed to initialize Glad!");
         glfwSetWindowUserPointer(GLwindow, &Data);
         SetVSync(true);
         

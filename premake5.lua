@@ -8,9 +8,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- use lua table to add the include dirs
 IncludeDir = {}
 IncludeDir["GLFW"] = "NinaEngine/dependence/GLFW/include"
+IncludeDir["GLAD"] = "NinaEngine/dependence/GLAD/include"
 
 -- include the sub premake5.lua
 include "NinaEngine/dependence/GLFW"
+include "NinaEngine/dependence/GLAD"
 
 project "NinaEngine"  
     location "NinaEngine"
@@ -32,12 +34,14 @@ project "NinaEngine"
     {
         "%{prj.name}/src",
         "%{prj.name}/dependence/spdlog/include",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}"
     }
 
     links
     {
         "GLFW",
+        "GLAD",
         "opengl32.lib"
     }
 
@@ -50,6 +54,7 @@ project "NinaEngine"
         {
             "NINA_PLATFORM_WINDOWS",
             "NINA_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands

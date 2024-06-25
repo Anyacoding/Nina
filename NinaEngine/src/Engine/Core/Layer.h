@@ -4,7 +4,7 @@
 
 namespace Nina
 {
-    class Layer
+    class NINA_API Layer
     {
     public:
         Layer(std::string Name = "Layer"): DebugName(std::move(Name))
@@ -22,4 +22,5 @@ namespace Nina
     protected:
         std::string DebugName;
     };
+    
 }
