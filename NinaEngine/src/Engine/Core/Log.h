@@ -1,11 +1,12 @@
 #pragma once
-
 #include "Core.h"
 #include "spdlog/spdlog.h"
 
+
 namespace Nina
 {
-    class NINA_API Log {
+    class NINA_API Log
+    {
     public:
         static void Init();
 

@@ -1,6 +1,8 @@
 #include "ninapch.h"
 #include "Application.h"
 #include "Engine/Events/ApplicationEvent.h"
+
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 
@@ -21,7 +23,7 @@ namespace Nina {
 
         if (Event.IsInCategory(EventCategoryApplication))
         {
-            NINA_CORE_LOG(warn, Event.ToString());  
+            NINA_CORE_LOG(warn, Event);  
         }
         
         while (bIsRunning)
@@ -30,6 +32,10 @@ namespace Nina {
             {
                 Layer->OnUpdate();
             }
+
+            glClearColor(1, 0, 1, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+
             Window->OnUpdate();
         }
     }
@@ -62,10 +68,12 @@ namespace Nina {
     void Application::PushLayer(Layer* Layer)
     {
         LayerStack.PushLayer(Layer);
+        Layer->OnAttach();
     }
     
     void Application::PushOverlay(Layer* Overlay)
     {
         LayerStack.PushOverlay(Overlay);
+        Overlay->OnAttach();
     }
 }

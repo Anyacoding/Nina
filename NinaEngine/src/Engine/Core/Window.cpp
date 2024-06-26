@@ -2,7 +2,7 @@
 #include "Window.h"
 
 #ifdef NINA_PLATFORM_WINDOWS
-    #include "Platform/Windows/WindowsWindow.h"
+#include "Platform/Windows/WindowsWindow.h"
 #endif
 
 

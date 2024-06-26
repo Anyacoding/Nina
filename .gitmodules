@@ -4,3 +4,6 @@
 [submodule "NinaEngine/dependence/GLFW"]
 	path = NinaEngine/dependence/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "NinaEngine/dependence/imgui"]
+	path = NinaEngine/dependence/imgui
+	url = https://github.com/TheCherno/imgui

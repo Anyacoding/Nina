@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Event.h"
-#include "Engine/Core/Core.h"
-#include <sstream>
 
 namespace Nina
 {

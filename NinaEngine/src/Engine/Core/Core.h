@@ -25,3 +25,18 @@
 #define BIT(x) (1 << (x))
 
 
+template<class T>
+class Singleton
+{
+public:
+    static T* Instance()
+    {
+        static T* Instance = new T();
+        return Instance;
+    }
+};
+
+
+
+
+

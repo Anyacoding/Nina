@@ -9,11 +9,11 @@ int main(int __argc, char** __argv)
     NINA_CORE_LOG(err, "Init Engine!");
     NINA_LOG(info, "Hello Anya!");
     
-    auto app = Nina::CreateApplication();
+    auto app = Nina::GetApplication();
     app->Run();
     delete app;
     
     return 0;
 }
-    
+
 #endif

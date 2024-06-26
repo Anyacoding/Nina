@@ -1,27 +1,25 @@
-project "GLAD"
+project "Glad"
     kind "StaticLib"
     language "C"
     
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
+    files
+    {
         "include/glad/glad.h",
         "include/KHR/khrplatform.h",
-        "src/glad.c",
+        "src/glad.c"
     }
 
-    includedirs
-    {
-        "include"
-    }
+	includedirs
+	{
+		"include"
+	}
     
-	filter "system:windows"
-
-        buildoptions { "-std=c11", "-lgdi32" }
+    filter "system:windows"
         systemversion "latest"
         staticruntime "On"
-
+        
     filter { "system:windows", "configurations:Release" }
         buildoptions "/MT"

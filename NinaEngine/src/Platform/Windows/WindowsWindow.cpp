@@ -3,7 +3,7 @@
 #include "Engine/Events/ApplicationEvent.h"
 #include "Engine/Events/KeyEvent.h"
 #include "Engine/Events/MouseEvent.h"
-
+#include "imgui.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -23,8 +23,6 @@ namespace Nina
 
     void WindowsWindow::OnUpdate()
     {
-        glClearColor(1, 0, 1, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
         glfwPollEvents();
         glfwSwapBuffers(GLwindow);
     }
@@ -93,8 +91,7 @@ namespace Nina
                     data->EventCallback(Event);
                     break;
                 }
-                default:
-                {
+                default: {
                     break;
                 }
             }

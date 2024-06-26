@@ -8,11 +8,12 @@
 #include <memory>
 #include <iostream>
 
+
 namespace Nina {
     
-    class NINA_API Application {
+    class NINA_API Application
+    {
     public:
-        Application();
         virtual ~Application() = default;
         
         virtual void Run();
@@ -20,6 +21,11 @@ namespace Nina {
 
         void PushLayer(Layer* Layer);
         void PushOverlay(Layer* Overlay);
+
+        Window& GetWindow() const { return *Window; }
+
+    protected:
+        Application();
 
     private:
         bool OnWindowClose(WindowCloseEvent& Event);
@@ -30,7 +36,7 @@ namespace Nina {
         LayerStack LayerStack;
     };
 
-    extern Application* CreateApplication();
+    extern Application* GetApplication();
     
 }
 

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "ninapch.h"
 #include "Engine/Core/Core.h"
-#include <string>
-#include <functional>
+#include "spdlog/fmt/bundled/ostream.h"
 
 namespace Nina
 {
@@ -24,7 +24,13 @@ namespace Nina
         EventCategoryMouse          = BIT(3),
         EventCategoryMouseButton    = BIT(4)
     };
+
+    #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
+    virtual EventType GetEvenType() const override { return GetStaticType(); } \
+    virtual const std::string GetName() const override { return #type; }
     
+    #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+
     
     class NINA_API Event
     {
@@ -44,17 +50,17 @@ namespace Nina
             return GetCategoryFlags() & category;
         }
 
-        friend std::ostream& operator<<(std::ostream& os, const Event& e)
+        friend  std::ostream& operator<<(std::ostream& os, const Event& e)
         {
             return os << e.ToString();
         }
-
+    
     public:
         bool bHandled = false;
     };
 
-    template<class T>
-    concept DerivedFromEvent = std::is_base_of_v<Event, T>;
+    // template<class T>
+    // concept DerivedFromEvent = std::is_base_of_v<Event, T>;
     
     class NINA_API EventDispatcher
     {
@@ -66,7 +72,7 @@ namespace Nina
         EventDispatcher(Event& Event): Event(Event)
         {}
 
-        template<DerivedFromEvent T>
+        template<class T>
         bool Dispatch(EventFn<T> Func)
         {
             if (Event.GetEvenType() == T::GetStaticType())
@@ -80,28 +86,7 @@ namespace Nina
     private:
         Event& Event;
     };
-
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
-virtual EventType GetEvenType() const override { return GetStaticType(); } \
-virtual const std::string GetName() const override { return #type; }
-    
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
     
 }
 
-// namespace fmt {
-//     template <>
-//     struct formatter<Nina::Event> {
-//         // Parse format specifications if needed (here we ignore them)
-//         constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
-//             return ctx.end();
-//         }
-//
-//         // Format the WindowResizeEvent
-//         template <typename FormatContext>
-//         auto format(const Nina::Event& event, FormatContext& ctx) -> decltype(ctx.out()) {
-//             return fmt::format_to(ctx.out(), "WindowResizeEvent(width={}, height={})", event.GetWidth(), event.GetHeight());
-//         }
-//     };
-// }
 

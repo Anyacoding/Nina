@@ -8,11 +8,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- use lua table to add the include dirs
 IncludeDir = {}
 IncludeDir["GLFW"] = "NinaEngine/dependence/GLFW/include"
-IncludeDir["GLAD"] = "NinaEngine/dependence/GLAD/include"
+IncludeDir["Glad"] = "NinaEngine/dependence/Glad/include"
+IncludeDir["ImGui"] = "NinaEngine/dependence/imgui"
 
 -- include the sub premake5.lua
 include "NinaEngine/dependence/GLFW"
-include "NinaEngine/dependence/GLAD"
+include "NinaEngine/dependence/Glad"
+include "NinaEngine/dependence/imgui"
 
 project "NinaEngine"  
     location "NinaEngine"
@@ -35,18 +37,20 @@ project "NinaEngine"
         "%{prj.name}/src",
         "%{prj.name}/dependence/spdlog/include",
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.GLAD}"
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}"
     }
 
     links
     {
         "GLFW",
-        "GLAD",
+        "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
     filter { "system:windows" } 
-        cppdialect "C++20"
+        cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
 
@@ -97,6 +101,9 @@ project "Sandbox"
         "%{prj.name}/src",
         "NinaEngine/dependence/spdlog/include",
         "NinaEngine/src",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}"
     }
 
     links
@@ -105,7 +112,7 @@ project "Sandbox"
     }
 
     filter { "system:windows" } 
-        cppdialect "C++20"
+        cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
 

@@ -25,25 +25,31 @@ public:
 
     void OnEvent(Nina::Event& Event) override
     {
-        NINA_LOG(trace, Event.ToString());
+        NINA_LOG(trace, Event);
     }
 
 };
 
-class SandBox: public Nina::Application
+class SandBox: public Nina::Application, public Singleton<SandBox>
 {
+private:
+    friend Singleton<SandBox>;
+    
 public:
     SandBox()
     {
+        NINA_LOG(err, "together");
         PushLayer(new ExampleLayer());
+        PushOverlay(new Nina::ImGuiLayer());
     }
-
 };
 
-Nina::Application* Nina::CreateApplication()
+Nina::Application* Nina::GetApplication()
 {
-    return new SandBox();
+    return SandBox::Instance();
 }
+
+
 
 
 
