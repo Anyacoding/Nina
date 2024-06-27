@@ -31,8 +31,8 @@ class Singleton
 public:
     static T* Instance()
     {
-        static T* Instance = new T();
-        return Instance;
+        static T Instance;
+        return &Instance;
     }
 };
 

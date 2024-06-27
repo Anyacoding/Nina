@@ -35,7 +35,6 @@ class SandBox: public Nina::Application, public Singleton<SandBox>
 private:
     friend Singleton<SandBox>;
     
-public:
     SandBox()
     {
         NINA_LOG(err, "together");
@@ -44,7 +43,7 @@ public:
     }
 };
 
-Nina::Application* Nina::GetApplication()
+Nina::Application* Nina::CreateApplication()
 {
     return SandBox::Instance();
 }

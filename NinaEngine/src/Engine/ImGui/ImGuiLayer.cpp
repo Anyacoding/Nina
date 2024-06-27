@@ -39,7 +39,7 @@ namespace Nina
         IO.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
         IO.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
 
-        ImGui_ImplOpenGL3_Init("#version 130");
+        ImGui_ImplOpenGL3_Init("#version 410");
     }
 
     void ImGuiLayer::OnDetach()
@@ -50,9 +50,8 @@ namespace Nina
     void ImGuiLayer::OnUpdate()
     {
         ImGuiIO& IO = ImGui::GetIO();
-        // Application* App = Nina::GetApplication();
-        // IO.DisplaySize = ImVec2(App->GetWindow().GetWidth(), App->GetWindow().GetHeight());
-        IO.DisplaySize = ImVec2(1280.0f, 720.0f);
+        Application* App = Application::GetApplication();
+        IO.DisplaySize = ImVec2(App->GetWindow().GetWidth(), App->GetWindow().GetHeight());
         
         float Time = static_cast<float>(glfwGetTime());
         IO.DeltaTime = PreTime > 0.0f ? (Time - PreTime) : (1.0f / 60.0f);

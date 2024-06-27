@@ -2,14 +2,12 @@
 #include "Application.h"
 #include "Engine/Events/ApplicationEvent.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 
 namespace Nina {
     
     Application::Application()
     {
+        Application::App = this;
         Window = std::unique_ptr<class Window>(Window::Create());
         Window->SetEventCallBack([this](Event& Event) -> void
         {
@@ -20,7 +18,7 @@ namespace Nina {
     void Application::Run()
     {
         const WindowResizeEvent Event(1280, 720);
-
+    
         if (Event.IsInCategory(EventCategoryApplication))
         {
             NINA_CORE_LOG(warn, Event);  
@@ -32,10 +30,6 @@ namespace Nina {
             {
                 Layer->OnUpdate();
             }
-
-            glClearColor(1, 0, 1, 1);
-            glClear(GL_COLOR_BUFFER_BIT);
-
             Window->OnUpdate();
         }
     }
@@ -47,7 +41,7 @@ namespace Nina {
         {
             return this->OnWindowClose(Event);
         });
-
+    
         for (auto It = LayerStack.rbegin(); It != LayerStack.rend(); ++It)
         {
             if (Event.bHandled)
