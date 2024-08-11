@@ -1,5 +1,4 @@
 ﻿#include <Nina.h>
-#include <iostream>
 
 #ifdef NINA_PLATFORM_WINDOWS
     #ifdef NINA_BUILD_DLL
@@ -38,7 +37,7 @@ private:
     SandBox()
     {
         NINA_LOG(err, "together");
-        PushLayer(new ExampleLayer());
+        // PushLayer(new ExampleLayer());
         PushOverlay(new Nina::ImGuiLayer());
     }
 };

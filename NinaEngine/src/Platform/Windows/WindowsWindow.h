@@ -13,10 +13,21 @@ namespace Nina
 
         void OnUpdate() override;
 
-        size_t GetWidth() const override { return Data.Width; }
-        size_t GetHeight() const override { return Data.Height; }
+        size_t GetWidth() const override
+        {
+            return Data.Width;
+        }
+        
+        size_t GetHeight() const override
+        {
+            return Data.Height;
+        }
 
-        void SetEventCallBack(const EventCallBackFn& CallBack) override { Data.EventCallback = CallBack; }
+        void SetEventCallBack(const EventCallBackFn& CallBack) override
+        {
+            Data.EventCallback = CallBack;
+        }
+        
         void SetVSync(bool bEnabled) override;
         bool IsVSync() const override;
 

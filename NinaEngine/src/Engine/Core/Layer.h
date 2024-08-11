@@ -9,8 +9,11 @@ namespace Nina
     public:
         Layer(std::string Name = "Layer"): DebugName(std::move(Name))
         {}
-        
+
+        Layer(const Layer&) = default;
+        Layer& operator=(const Layer&) = default;
         virtual ~Layer() = default;
+        
 
         virtual void OnAttach() {}
         virtual void OnDetach() {}

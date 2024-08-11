@@ -50,10 +50,10 @@ namespace Nina
     void ImGuiLayer::OnUpdate()
     {
         ImGuiIO& IO = ImGui::GetIO();
-        Application* App = Application::GetApplication();
-        IO.DisplaySize = ImVec2(App->GetWindow().GetWidth(), App->GetWindow().GetHeight());
+        const Application* App = Application::GetApplication();
+        IO.DisplaySize = ImVec2(static_cast<float>(App->GetWindow().GetWidth()), static_cast<float>(App->GetWindow().GetHeight()));
         
-        float Time = static_cast<float>(glfwGetTime());
+        const float Time = static_cast<float>(glfwGetTime());
         IO.DeltaTime = PreTime > 0.0f ? (Time - PreTime) : (1.0f / 60.0f);
         PreTime = Time;
         
@@ -69,6 +69,86 @@ namespace Nina
     
     void ImGuiLayer::OnEvent(Event& Event)
     {
+        EventDispatcher Dispatcher(Event);
         
+        // Mouse Event
+        Dispatcher.Dispatch<MouseButtonPressedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressed));
+        Dispatcher.Dispatch<MouseButtonReleasedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleased));
+        Dispatcher.Dispatch<MouseMovedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnMouseMoved));
+        Dispatcher.Dispatch<MouseScrolledEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolled));
+        // Key Event
+        Dispatcher.Dispatch<KeyPressedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnKeyPressed));
+        Dispatcher.Dispatch<KeyReleasedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnKeyReleased));
+        Dispatcher.Dispatch<KeyTypedEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnKeyTyped));
+        // Window Event
+        Dispatcher.Dispatch<WindowResizeEvent>(NINA_BIND_EVENT_FN(ImGuiLayer::OnWindowResize));
+    }
+
+    bool ImGuiLayer::OnMouseButtonPressed(MouseButtonPressedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.MouseDown[Event.GetMouseButton()] = true;
+        return false;
+    }
+    
+    bool ImGuiLayer::OnMouseButtonReleased(MouseButtonReleasedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.MouseDown[Event.GetMouseButton()] = false;
+        return false;
+    }
+    
+    bool ImGuiLayer::OnMouseMoved(MouseMovedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.MousePos = ImVec2(Event.GetX(), Event.GetY());
+        return false;
+    }
+    
+    bool ImGuiLayer::OnMouseScrolled(MouseScrolledEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.MouseWheelH += Event.GetOffsetX();
+        IO.MouseWheel += Event.GetOffsetY();
+        return false;
+    }
+    
+    bool ImGuiLayer::OnKeyPressed(KeyPressedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.KeysDown[Event.GetKeyCode()] = true;
+        
+        IO.KeyCtrl = IO.KeysDown[GLFW_KEY_LEFT_CONTROL] || IO.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+        IO.KeyShift = IO.KeysDown[GLFW_KEY_LEFT_SHIFT]  || IO.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+        IO.KeyAlt = IO.KeysDown[GLFW_KEY_LEFT_ALT]      || IO.KeysDown[GLFW_KEY_RIGHT_ALT];
+        IO.KeySuper = IO.KeysDown[GLFW_KEY_LEFT_SUPER]  || IO.KeysDown[GLFW_KEY_RIGHT_SUPER];
+        
+        return false;
+    }
+    
+    bool ImGuiLayer::OnKeyReleased(KeyReleasedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.KeysDown[Event.GetKeyCode()] = false;
+        return false;
+    }
+    
+    bool ImGuiLayer::OnKeyTyped(KeyTypedEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        const unsigned InputCharacter = (Event.GetInputCharacter());
+        if (InputCharacter > 0 && InputCharacter < 0x10000)
+        {
+            IO.AddInputCharacter(static_cast<unsigned short>(InputCharacter));
+        }
+        return false;
+    }
+    
+    bool ImGuiLayer::OnWindowResize(WindowResizeEvent& Event) const
+    {
+        ImGuiIO& IO = ImGui::GetIO();
+        IO.DisplaySize = ImVec2(static_cast<float>(Event.GetWidth()), static_cast<float>(Event.GetHeight()));
+        IO.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+        return false;
     }
 }

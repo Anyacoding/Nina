@@ -23,10 +23,12 @@ namespace Nina
 
     void WindowsWindow::OnUpdate()
     {
-        // glClearColor(1, 0, 1, 1);
-        // glClear(GL_COLOR_BUFFER_BIT);
+        // swap the current frame with the previous frame and show the previous frame
         glfwPollEvents();
         glfwSwapBuffers(GLwindow);
+        // clear next frame
+        glClearColor(1, 0, 1, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 
     void WindowsWindow::Init(const WindowProps& Props)
@@ -52,7 +54,6 @@ namespace Nina
         glfwSetWindowUserPointer(GLwindow, &Data);
         SetVSync(true);
         
-
         // Set GLFW CallBacks
         glfwSetErrorCallback([](int error, const char* description) {
             NINA_CORE_LOG(err, "GLFW Error ({0}): {1}", error, description);
@@ -62,9 +63,10 @@ namespace Nina
             WindowData* data = static_cast<WindowData*>(glfwGetWindowUserPointer(Window));
             data->Width = W;
             data->Height = H;
-
             WindowResizeEvent Event(W, H);
             data->EventCallback(Event);
+            // TODO: temp
+            glViewport(0, 0, W, H);
         });
 
         glfwSetWindowCloseCallback(GLwindow, [](GLFWwindow* Window){
@@ -131,8 +133,14 @@ namespace Nina
         
         glfwSetCursorPosCallback(GLwindow, [](GLFWwindow* Window, double XPos, double YPos) {
             WindowData* data = static_cast<WindowData*>(glfwGetWindowUserPointer(Window));
-            MouseMovedEvent event(static_cast<float>(XPos), static_cast<float>(YPos));
-            data->EventCallback(event);
+            MouseMovedEvent Event(static_cast<float>(XPos), static_cast<float>(YPos));
+            data->EventCallback(Event);
+        });
+
+        glfwSetCharCallback(GLwindow, [](GLFWwindow* Window, unsigned int InputCharacter) {
+            WindowData* data = static_cast<WindowData*>(glfwGetWindowUserPointer(Window));
+            KeyTypedEvent Event(InputCharacter);
+            data->EventCallback(Event);
         });
     }
 

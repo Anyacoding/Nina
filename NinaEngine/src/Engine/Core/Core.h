@@ -24,6 +24,10 @@
 
 #define BIT(x) (1 << (x))
 
+// #define NINA_BIND_EVENT_FN(func) std::bind(&func, this, std::placeholders::_1)
+
+#define NINA_BIND_EVENT_FN(func) [this](auto& Event) { return this->func(Event); } 
+
 
 template<class T>
 class Singleton

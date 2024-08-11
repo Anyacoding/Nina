@@ -36,12 +36,14 @@ namespace Nina {
 
     void Application::OnEvent(Event& Event)
     {
+        NINA_CORE_LOG(trace, Event);
+        
         EventDispatcher Dispatcher(Event);
         Dispatcher.Dispatch<WindowCloseEvent>([this](WindowCloseEvent& Event)
         {
             return this->OnWindowClose(Event);
         });
-    
+        
         for (auto It = LayerStack.rbegin(); It != LayerStack.rend(); ++It)
         {
             if (Event.bHandled)

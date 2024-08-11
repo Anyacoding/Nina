@@ -55,4 +55,25 @@ namespace Nina
 
         EVENT_CLASS_TYPE(KeyReleased)
     };
+
+    class NINA_API KeyTypedEvent: public KeyEvent
+    {
+    public:
+        KeyTypedEvent(unsigned int Char): KeyEvent(static_cast<int>(Char)), InputCharacter(Char)
+        {}
+
+        unsigned int GetInputCharacter() const { return InputCharacter; }
+        
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyTypedEvent: " << KeyCode;
+            return ss.str();
+        }
+
+        EVENT_CLASS_TYPE(KeyTyped)
+
+    private:
+        unsigned int InputCharacter;
+    };
 }
