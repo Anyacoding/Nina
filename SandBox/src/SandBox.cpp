@@ -32,7 +32,7 @@ public:
 class SandBox: public Nina::Application, public Singleton<SandBox>
 {
 private:
-    friend Singleton<SandBox>;
+    friend Singleton;
     
     SandBox()
     {
